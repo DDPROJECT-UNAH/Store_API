@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2024 at 07:04 AM
+-- Generation Time: Aug 17, 2024 at 08:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,10 +35,22 @@ CREATE TABLE `productos` (
   `Categoria` varchar(50) NOT NULL,
   `Imagen` varchar(1000) NOT NULL,
   `FechaCreacion` date NOT NULL,
-  `UsuarioCreacion` int(11) NOT NULL,
-  `FechaEdicion` date NOT NULL,
-  `UsuarioEdicion` int(11) NOT NULL
+  `UsuarioCreacion` int(11) DEFAULT NULL,
+  `FechaEdicion` date DEFAULT NULL,
+  `UsuarioEdicion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `productos`
+--
+
+INSERT INTO `productos` (`ID`, `Titulo`, `Precio`, `Descripcion`, `Categoria`, `Imagen`, `FechaCreacion`, `UsuarioCreacion`, `FechaEdicion`, `UsuarioEdicion`) VALUES
+(1, 'Jamon', 40, 'Jamon toledo', 'Carnes', 'https://walmarthn.vtexassets.com/arquivos/ids/302982/Jam-n-De-Pavo-Marca-Toledo-230gr-1-7809.jpg?v=638251727403800000', '2024-08-05', 1, NULL, NULL),
+(2, 'Lechuga', 20, 'Lechuga unidad', 'Verduras', 'https://walmarthn.vtexassets.com/arquivos/ids/361757/Lechuga-Cabeza-con-un-peso-aproximado-de-0-72-libra-1-53.jpg?v=638420098761430000', '2024-08-21', 2, NULL, NULL),
+(3, 'Doritos', 15, 'Doritos unidad', 'Snacks', 'https://www.doritos.com/sites/doritos.com/files/2024-06/new-nacho-cheese%202024.png', '2024-08-02', 3, NULL, NULL),
+(4, 'Mantequilla', 25, 'Mantequilla libra', 'Lacteos', 'https://t1.uc.ltmcdn.com/es/posts/9/1/6/como_hacer_crema_de_leche_casera_50619_600.jpg', '2024-08-09', 1, NULL, NULL),
+(5, 'Dulce de Leche', 33, 'Dulce de Leche unidad', 'Dulces', 'https://www.clarin.com/img/2022/10/10/UjnY2Plmk_2000x1500__1.jpg', '2024-07-13', 2, NULL, NULL),
+(6, 'Galletas Principe', 20, 'Galletas Principe unidad', 'Galletas', 'https://media.justo.mx/products/7503034672104-1.jpg', '2024-07-16', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -60,7 +72,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`ID`, `Tipo`, `Nombre`, `Usuario`, `Contrasena`) VALUES
 (1, 'Admin', 'Wai', 'wtse', 'wtse123'),
-(2, 'Admin', 'Brayan', 'Brayan', 'Brayan123');
+(2, 'Admin', 'Brayan', 'Brayan', 'Brayan123'),
+(3, 'Admin', 'Luis', 'Luis', 'Luis1234');
 
 --
 -- Indexes for dumped tables
@@ -88,13 +101,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
