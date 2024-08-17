@@ -1,20 +1,41 @@
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : ''
+const mysql = require('mysql');
+
+// Configuración de la conexión
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'store' // Asegúrate de que la base de datos 'store' esté especificada aquí
 });
 
-connection.connect();
-
-connection.query('SELECT * FROM store.usuarios; ', function(err, rows, fields) {
-  if (err) throw err;
-  console.log('The solution is: ', rows[0].Nombre);
+// Conectar a la base de datos
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to the database:', err.stack);
+    return;
+  }
+  console.log('Connected to the database.');
 });
 
-connection.query('SELECT * FROM store.usuarios; ', function(err, rows, fields) {
-    if (err) throw err;
-    console.log('The solution is: ', rows[0].Nombre);
+// btener usuarios
+function getUsuarios(callback) {
+  connection.query('SELECT * FROM usuarios', (err, rows) => {
+    if (err) return callback(err);
+    callback(null, rows);
   });
+}
 
-connection.end();
+//obtener productos
+function getProductos(callback) {
+  connection.query('SELECT * FROM productos', (err, rows) => {
+    if (err) return callback(err);
+    callback(null, rows);
+  });
+}
+
+
+module.exports = {
+  connection,
+  getUsuarios,
+  getProductos,
+};
