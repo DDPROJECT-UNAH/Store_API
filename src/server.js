@@ -1,9 +1,17 @@
-const db = require('../Database/Connection.js');
+const express = require('express');
+const dotenv = require('dotenv');
 
-// Obtener y mostrar los usuarios
-db.getUsuarios((err, usuarios) => {
-  if (err) throw err;
-  console.log('Usuarios:', usuarios);
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
-
+/*prueba para saber si genera token
+const {generateToken} = require('../src/middleware/authMiddleware.js');
+console.log(generateToken('carlos'))*/
