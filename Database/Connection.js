@@ -1,11 +1,15 @@
 const mysql = require('mysql');
+const dotenv = require('dotenv');
+const config = require('../config');
+
+dotenv.config();
 
 // Configuración de la conexión
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'store' // Asegúrate de que la base de datos 'store' esté especificada aquí
+  host: config.mysql.host,
+  user: config.mysql.user,
+  password: config.mysql.password,
+  database: config.mysql.database
 });
 
 // Conectar a la base de datos
@@ -37,5 +41,5 @@ function getProductos(callback) {
 module.exports = {
   connection,
   getUsuarios,
-  getProductos,
+  getProductos
 };

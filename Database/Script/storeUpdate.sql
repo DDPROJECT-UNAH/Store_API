@@ -60,7 +60,6 @@ INSERT INTO `productos` (`ID`, `Titulo`, `Precio`, `Descripcion`, `Categoria`, `
 
 CREATE TABLE `usuarios` (
   `ID` int(11) NOT NULL,
-  `Tipo` varchar(25) NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Usuario` varchar(50) NOT NULL,
   `Contrasena` varchar(250) NOT NULL
@@ -70,10 +69,38 @@ CREATE TABLE `usuarios` (
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`ID`, `Tipo`, `Nombre`, `Usuario`, `Contrasena`) VALUES
-(1, 'Admin', 'Wai', 'wtse', 'wtse123'),
-(2, 'Admin', 'Brayan', 'Brayan', 'Brayan123'),
-(3, 'Admin', 'Luis', 'Luis', 'Luis1234');
+INSERT INTO `usuarios` (`ID`, `Nombre`, `Usuario`, `Contrasena`) VALUES
+(1, 'Wai', 'wtse', '$2b$04$Gco.ESzRc5psb5b5rbjnQ.O0daov.0PHzWscpiYd3l1AvWvPeknRa'),
+(2, 'Brayan', 'Brayan', '$2b$04$6llHbkh/poD/CEQLAuxEeOzytlA8P7H5ZAzDhqcsyMJ7CzDTKXE3C'),
+(3, 'Luis', 'Luis', '$2b$04$BPTxMBH0FXAOpKV2M.ILGOQMRL2hlOwzZBNYaWBBJ2IO9Zz3L3Ovy'),
+(4, 'Jehnson', 'Jehnson', '$2b$04$kXi6KOAWqnvyGZZn8fHArOXeC4cBjIfuUZhYMwpcHiPSGoSpbhFxi'),
+(5, 'Jancy', 'Jancy', '$2b$04$wZtxb8LfFvZpCVVgL/jxKOj8B/Qn7SYwRZXqVOzoMUtGprfLF1Ywi'),
+(6, 'Carlos', 'Carlos', '$2b$04$wYT8bLxkF8l.2dap2I4GluamD7SIUWFVL4Y2RrBnXa0bD4l5e4Spe'),
+(7, 'Jeyson', 'Jeyson', '$2b$04$8uBvBH7G1gAKm7Uxrxn/BOYrKVdaPU9eNH60DyK7P6V8qbTGTbB9.');
+
+-- LISTA DE USUARIOS REGISTRADOS:
+-- "Usuario": "Brayan",
+-- "Contrasena": "Brayan123"
+
+-- "Usuario": "Carlos",
+-- "Contrasena": "Carlos123"
+
+-- "Usuario": "Jancy",
+-- "Contrasena": "chambers*1587"
+
+-- "Usuario": "Jehnson",
+-- "Contrasena": "Jehnson123"
+
+-- "Usuario": "Jeyson",
+-- "Contrasena": "Jeyson123"
+
+-- "Usuario": "Luis",
+-- "Contrasena": "Luis1234"
+
+-- "Usuario": "wtse",
+-- "Contrasena": "wtse1234"
+
+
 
 --
 -- Indexes for dumped tables
