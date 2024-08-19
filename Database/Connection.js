@@ -21,7 +21,7 @@ connection.connect((err) => {
   console.log('Connected to the database.');
 });
 
-// btener usuarios
+// Obtener usuarios
 function getUsuarios(callback) {
   connection.query('SELECT * FROM usuarios', (err, rows) => {
     if (err) return callback(err);
