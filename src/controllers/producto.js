@@ -58,12 +58,46 @@ class ProductoController {
         res.status(201).json({ message: 'Producto insertado correctamente', id: result.insertId });
     });
 
-
-
-
-       
     }
 
+    static updateProduct(req, res) {
+
+        const { id } = req.params
+        const data = req.body
+        const row = {};
+        connection.query('SELECT * FROM productos where ID = ?', id , (err, rows) => {
+            if (err) return callback(err);
+            if(rows.length === 0){
+                return res
+                .status(404)
+                .json({ error: 'Producto no encontrado' })
+            }
+            row = rows [0];
+        });
+
+        //validar que los datos sean correctos
+        const resultado = validarProductoParcial(data)
+
+        if (!resultado.success) {
+            return res.status(400).json(JSON.parse(resultado.error))
+        }
+
+        const query = 'UPDATE `productos` SET `Titulo` = ? , `Precio`= ? , `Descripcion` = ? , `Categoria` = ? , `Imagen` = ?, `FechaEdicion` = ? , `UsuarioEdicion` = ? ';
+
+        //es una nueva referencia de producto (no existe en la BBDD)
+        const productoActualizado = { ...row, ...data }
+        connection.query(query, productoActualizado, (err, result) => {
+            if (err) return res.status(500).json({ error: err.message });
+    
+            res.status(200).json({ message: 'Producto insertado correctamente', id: result.insertId });
+        });
+        //actualizar el producto en la BBDD
+        productos[productIndex] = productoActualizado
+
+        return res.json(productoActualizado)
+
+
+    }
     
 }
 
