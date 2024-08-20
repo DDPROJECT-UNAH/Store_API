@@ -1,5 +1,5 @@
 const {connection} = require('../../Database/Connection');
-const {validarProducto } = require('../schemas/producto.js')
+const {validarProducto,validarProductoParcial } = require('../schemas/producto.js')
 
 class ProductoController {
     
@@ -48,7 +48,7 @@ class ProductoController {
             return res.status(400).json(JSON.stringify(resultados.error))
         }
 
-        const query = 'INSERT INTO `productos`(`Titulo`, `Precio`, `Descripcion`, `Categoria`, `Imagen`, `FechaCreacion`, `UsuarioCreacion`) VALUES (?,?,?,?,?,?,?)';
+        const query = 'INSERT INTO productos(title, price, description, category, image, createdDate, createdUser) VALUES (?,?,?,?,?,?,?)';
       
         const values = [ data.title, data.price, data.description,data.category, data.image,new Date(),1];
 
@@ -64,7 +64,7 @@ class ProductoController {
 
         const { id } = req.params
         const data = req.body
-        const row = {};
+        let row = {};
         connection.query('SELECT * FROM productos where ID = ?', id , (err, rows) => {
             if (err) return callback(err);
             if(rows.length === 0){
@@ -82,20 +82,18 @@ class ProductoController {
             return res.status(400).json(JSON.parse(resultado.error))
         }
 
-        const query = 'UPDATE `productos` SET `Titulo` = ? , `Precio`= ? , `Descripcion` = ? , `Categoria` = ? , `Imagen` = ?, `FechaEdicion` = ? , `UsuarioEdicion` = ? ';
+        const query = 'UPDATE productos SET title = ? , price= ? , description = ? , category = ? , image = ?, modifiedDate = ? , modifiedUser = ? WHERE id = ? ';
 
         //es una nueva referencia de producto (no existe en la BBDD)
         const productoActualizado = { ...row, ...data }
-        connection.query(query, productoActualizado, (err, result) => {
+        console.log(productoActualizado)
+        const values = [ productoActualizado.title, productoActualizado.price, productoActualizado.description,productoActualizado.category, productoActualizado.image,new Date(),1, productoActualizado.ID];
+
+        connection.query(query, values, (err, result) => {
             if (err) return res.status(500).json({ error: err.message });
     
-            res.status(200).json({ message: 'Producto insertado correctamente', id: result.insertId });
+            res.status(200).json({ message: 'Producto actualizado correctamente', id: result.insertId });
         });
-        //actualizar el producto en la BBDD
-        productos[productIndex] = productoActualizado
-
-        return res.json(productoActualizado)
-
 
     }
     
