@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const {connection} = require('../../Database/Connection');
 const authToken = require('../middleware/authMiddleware');
+
 const router = express.Router();
 
 router.post('/', (req, res, next) => {

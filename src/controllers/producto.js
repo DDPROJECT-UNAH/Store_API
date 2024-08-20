@@ -1,5 +1,12 @@
+// const db = require('../../DB/mysql');
+
 const {connection} = require('../../Database/Connection');
+
 const {validarProducto } = require('../schemas/producto.js')
+const  {verifyToken} = require('../middleware/authMiddleware.js')
+
+
+
 
 class ProductoController {
     
@@ -9,32 +16,6 @@ class ProductoController {
               res.json(rows)
           });
 
-    }
-
-    static getProductosById(req, res) {
-        if(Number(req.params.id).toString() === "NaN"){
-            return res.status(400).json({message: "Id debe ser un numero"})
-        }
-        if(Number(req.params.id)===0){
-            return res.status(400).json({message: "Id debe ser mayor que cero"})
-        }
-        connection.query('SELECT * FROM productos where ID = ?', req.params.id , (err, rows) => {
-            if (err) return callback(err);
-              res.json(rows)
-        });
-    }
-
-    static deleteProduct(req, res){
-        if(Number(req.params.id).toString() === "NaN"){
-            return res.status(400).json({message: "Id debe ser un numero"})
-        }
-        if(Number(req.params.id)===0){
-            return res.status(400).json({message: "Id debe ser mayor que cero"})
-        }
-        connection.query('DElETE FROM productos where ID = ?', req.params.id , (err, rows) => {
-            if (err) return callback(err);
-              res.json(rows)
-        });
     }
 
     static saveProduct(req, res) {
