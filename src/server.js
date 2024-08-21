@@ -15,7 +15,9 @@ const PORT = config.app.port;
 
 app.use("/auth", auth);
 app.all("*", (req, res, next) => {
-  verifyToken(req, res, next);
+  if(!req.baseUrl.includes("auth")){
+    verifyToken(req, res, next);
+  }
 });
 app.use("/productos", routerProductos);
 
