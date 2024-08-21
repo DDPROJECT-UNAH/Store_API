@@ -14,8 +14,10 @@ dotenv.config();
 const PORT = config.app.port;
 
 app.use("/auth", auth);
+
 app.all("*", (req, res, next) => {
-  if(!req.baseUrl.includes("auth")){
+
+  if(!req.originalUrl.includes("auth")){
     verifyToken(req, res, next);
   }
 });
